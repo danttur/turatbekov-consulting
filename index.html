@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Д.Р. Туратбеков | Финансовый и управленческий консалтинг</title>
+    <!-- Подключение Google Fonts: Inter, Manrope, Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- Подключение Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Конфигурация фирменных цветов и шрифтов -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            950: '#090E1A',
+                            900: '#0F172A',
+                            800: '#1E293B',
+                            700: '#334155',
+                        },
+                        gold: {
+                            300: '#E2C890',
+                            400: '#D4B475',
+                            500: '#C5A059',
+                            600: '#A6833E',
+                        },
+                        slatebg: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Manrope', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    boxShadow: {
+                        'executive': '0 10px 30px -5px rgba(15, 23, 42, 0.08)',
+                        'gold-glow': '0 8px 24px -4px rgba(197, 160, 89, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Плавные анимации и кастомные детали */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #DFC286 0%, #C5A059 50%, #A8843E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border-subtle {
+            border-color: rgba(197, 160, 89, 0.28);
+        }
+        .card-hover {
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 36px -10px rgba(15, 23, 42, 0.12);
+            border-color: rgba(197, 160, 89, 0.6);
+        }
+        /* Скрытие скроллбара для мобильных табов */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-slatebg text-navy-900 font-sans antialiased selection:bg-gold-500 selection:text-white">
+
+    <!-- ==================== ШАПКА (HEADER) ==================== -->
+    <header id="navbar" class="sticky top-0 z-40 bg-navy-900/95 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Логотип / Имя -->
+                <a href="#top" class="flex items-center gap-3.5 group focus:outline-none">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-navy-950 font-serif font-bold text-xl shadow-gold-glow group-hover:scale-105 transition-transform">
+                        ДТ
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-display font-bold text-white text-base sm:text-lg tracking-tight leading-tight">
+                            Д.Р. Туратбеков
+                        </span>
+                        <span class="text-[11px] sm:text-xs text-gold-400 uppercase tracking-widest font-medium">
+                            Финансовый консалтинг
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Десктопная навигация -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="#about" class="text-sm font-medium text-slate-300 hover:text-gold-400 transition-colors">Об эксперте</a>
+                    <a href="#services" class="text-sm font-medium text-slate-300 hover:text-gold-400 transition-colors">Услуги</a>
+                    <a href="#accreditations" class="text-sm font-medium text-slate-300 hover:text-gold-400 transition-colors">Аккредитации</a>
+                    <a href="#process" class="text-sm font-medium text-slate-300 hover:text-gold-400 transition-colors">Формат работы</a>
+                    <a href="#contacts" class="text-sm font-medium text-slate-300 hover:text-gold-400 transition-colors">Контакты</a>
+                </nav>
+
+                <!-- Кнопка действия + Мобильное меню -->
+                <div class="flex items-center gap-3">
+                    <button onclick="openConsultationModal('Общая консультация')" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-gold-500 hover:bg-gold-400 text-navy-950 font-display font-semibold text-sm transition-all shadow-gold-glow cursor-pointer">
+                        Заказать консультацию
+                    </button>
+                    <!-- Бургер-кнопка для мобильных -->
+                    <button id="mobile-menu-btn" aria-label="Открыть меню" class="lg:hidden p-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 focus:outline-none">
+                        <svg id="burger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Выпадающее мобильное меню -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-navy-900 border-t border-white/10 px-4 pt-3 pb-6 space-y-2">
+            <a href="#about" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-white/5 hover:text-gold-400">Об эксперте</a>
+            <a href="#services" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-white/5 hover:text-gold-400">Услуги</a>
+            <a href="#accreditations" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-white/5 hover:text-gold-400">Аккредитации</a>
+            <a href="#process" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-white/5 hover:text-gold-400">Формат работы</a>
+            <a href="#contacts" class="mobile-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:bg-white/5 hover:text-gold-400">Контакты</a>
+            <div class="pt-3">
+                <button onclick="openConsultationModal('Общая консультация')" class="w-full py-3 rounded-lg bg-gold-500 text-navy-950 font-display font-bold text-sm">
+                    Заказать консультацию
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== ПЕРВЫЙ ЭКРАН (HERO) ==================== -->
+    <section id="top" class="relative bg-navy-900 text-white overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+        <!-- Декоративная архитектурная сетка на фоне -->
+        <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: radial-gradient(#C5A059 1px, transparent 1px); background-size: 32px 32px;"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Левая текстовая колонка -->
+                <div class="lg:col-span-8 space-y-6">
+                    <!-- Бейдж с девизом -->
+                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-navy-800/90 border border-gold-500/40 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-gold-500"></span>
+                        <span class="font-serif italic text-gold-300 text-sm sm:text-base tracking-wide">
+                            «Защита и приумножение!»
+                        </span>
+                    </div>
+
+                    <!-- Главный заголовок -->
+                    <h1 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-[44px] leading-[1.18] tracking-tight text-white">
+                        Финансовый и управленческий консалтинг для бизнеса и 
+                        <span class="gold-gradient-text">инвестиционных проектов</span>
+                    </h1>
+
+                    <!-- Подзаголовок -->
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-3xl font-normal">
+                        22+ года опыта в корпоративных финансах, финансовом моделировании и разработке бизнес-планов. Более 50 реализованных проектов для компаний МСБ и частных инвесторов в Кыргызстане и Центральной Азии.
+                    </p>
+
+                    <!-- Кнопки CTA -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                        <button onclick="openConsultationModal('Обсуждение нового проекта')" class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-display font-bold text-base transition-all shadow-gold-glow cursor-pointer">
+                            <span>Обсудить проект</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </button>
+                        <a href="#services" class="inline-flex items-center justify-center px-7 py-4 rounded-xl bg-navy-800 hover:bg-navy-700 text-white border border-white/15 font-display font-semibold text-base transition-all">
+                            Смотреть услуги
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Правая колонка: Визитная карточка эксперта -->
+                <div class="lg:col-span-4">
+                    <div class="bg-navy-800/80 backdrop-blur-sm border border-gold-500/30 rounded-2xl p-6 sm:p-7 shadow-2xl relative">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-5 mb-5">
+                            <div>
+                                <p class="text-xs uppercase tracking-widest text-gold-400 font-semibold mb-1">Ведущий консультант</p>
+                                <h2 class="font-display font-bold text-xl text-white">Туратбеков Данияр Раимбекович</h2>
+                            </div>
+                            <div class="w-12 h-12 rounded-xl bg-navy-900 border border-gold-500/40 flex items-center justify-center text-gold-400 shrink-0">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <ul class="space-y-3.5 text-sm text-slate-300">
+                            <li class="flex items-start gap-3">
+                                <span class="text-gold-400 font-bold mt-0.5">✓</span>
+                                <span>Аккредитованный консультант <strong class="text-white">ЕБРР (EBRD)</strong> и <strong class="text-white">АКФР</strong></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-gold-400 font-bold mt-0.5">✓</span>
+                                <span>Член Клуба бизнес-консультантов Кыргызстана</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-gold-400 font-bold mt-0.5">✓</span>
+                                <span>Стандарты UNIDO, международных банков и инвестфондов</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-gold-400 font-bold mt-0.5">✓</span>
+                                <span>г. Бишкек, работа по всему Кыргызстану и Центральной Азии</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+                            <span>ИП Туратбеков Д.Р.</span>
+                            <span class="text-gold-400 font-medium">Св-во № 01932806</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI-карточки (4 ключевых показателя) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-14 pt-8 border-t border-white/10">
+                <div class="bg-navy-800/60 border border-white/10 rounded-xl p-5 flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-gold-500/15 text-gold-400 flex items-center justify-center shrink-0 font-display font-bold">
+                        22+
+                    </div>
+                    <div>
+                        <div class="font-display font-bold text-white text-lg">22+ года опыта</div>
+                        <p class="text-xs text-slate-400 mt-0.5">В корпоративных финансах и управлении</p>
+                    </div>
+                </div>
+
+                <div class="bg-navy-800/60 border border-white/10 rounded-xl p-5 flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-gold-500/15 text-gold-400 flex items-center justify-center shrink-0 font-display font-bold">
+                        50+
+                    </div>
+                    <div>
+                        <div class="font-display font-bold text-white text-lg">50+ проектов</div>
+                        <p class="text-xs text-slate-400 mt-0.5">Реализовано для МСБ и инвесторов ЦА</p>
+                    </div>
+                </div>
+
+                <div class="bg-navy-800/60 border border-white/10 rounded-xl p-5 flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-gold-500/15 text-gold-400 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-display font-bold text-white text-lg">ЕБРР и АКФР</div>
+                        <p class="text-xs text-slate-400 mt-0.5">Официальная аккредитация фондов</p>
+                    </div>
+                </div>
+
+                <div class="bg-navy-800/60 border border-white/10 rounded-xl p-5 flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-gold-500/15 text-gold-400 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-display font-bold text-white text-lg">ИП с 2022 г.</div>
+                        <p class="text-xs text-slate-400 mt-0.5">Св-во № 01932806 (г. Бишкек)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== БЛОК "ОБ ЭКСПЕРТЕ" ==================== -->
+    <section id="about" class="py-16 lg:py-24 bg-white border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+                <div class="lg:col-span-5">
+                    <span class="text-xs font-bold uppercase tracking-widest text-gold-600">Экспертиза и подход</span>
+                    <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-navy-900 mt-2 leading-tight">
+                        Финансовая архитектура, защищающая интересы собственника
+                    </h2>
+                    <div class="w-16 h-1 bg-gold-500 rounded-full mt-5"></div>
+                    <blockquote class="mt-6 p-5 bg-slatebg border-l-4 border-gold-500 rounded-r-xl">
+                        <p class="font-serif italic text-navy-800 text-lg">
+                            «Защита и приумножение капитала начинаются с прозрачных цифр, стресс-тестирования рисков и жесткой финансовой дисциплины».
+                        </p>
+                        <footer class="mt-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                            — Данияр Туратбеков
+                        </footer>
+                    </blockquote>
+                </div>
+
+                <div class="lg:col-span-7 space-y-5 text-slate-600 text-base leading-relaxed">
+                    <p>
+                        Более двух десятилетий я помогаю собственникам бизнеса, генеральным директорам и частным инвесторам принимать взвешенные решения на основе точных финансовых моделей и глубокой управленческой аналитики.
+                    </p>
+                    <p>
+                        Моя специализация объединяет два ключевых направления: <strong class="text-navy-900">привлечение инвестиций и кредитного финансирования</strong> (разработка бизнес-планов и ТЭО, проходящих экспертизу в международных институтах развития и коммерческих банках) и <strong class="text-navy-900">построение внутреннего финансового порядка</strong> (управленческий учет, бюджетирование, контроль денежных потоков).
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
+                        <div class="p-4 rounded-xl bg-slatebg border border-slate-200/80">
+                            <h3 class="font-display font-bold text-navy-900 text-sm">Практика, а не теория</h3>
+                            <p class="text-xs text-slate-500 mt-1">Каждый документ адаптирован под реальную экономику Кыргызстана и требования конкретных кредиторов или фондов.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slatebg border border-slate-200/80">
+                            <h3 class="font-display font-bold text-navy-900 text-sm">Конфиденциальность (NDA)</h3>
+                            <p class="text-xs text-slate-500 mt-1">Гарантированная защита коммерческой тайны, управленческой отчетности и инвестиционных замыслов клиента.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== БЛОК "СПИСОК УСЛУГ" ==================== -->
+    <section id="services" class="py-16 lg:py-24 bg-slatebg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Заголовок блока -->
+            <div class="max-w-3xl">
+                <span class="text-xs font-bold uppercase tracking-widest text-gold-600">Компетенции и решения</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-navy-900 mt-2">
+                    Список консалтинговых услуг
+                </h2>
+                <p class="text-slate-600 mt-3 text-base">
+                    Выберите направление или воспользуйтесь фильтром, чтобы подобрать решение под текущую задачу вашего бизнеса.
+                </p>
+            </div>
+
+            <!-- Интерактивные табы фильтрации -->
+            <div class="mt-8 flex items-center gap-2.5 overflow-x-auto no-scrollbar pb-2" role="tablist" aria-label="Фильтр услуг">
+                <button data-filter="all" class="service-tab active shrink-0 px-5 py-2.5 rounded-xl text-sm font-display font-semibold transition-all bg-navy-900 text-white shadow-sm cursor-pointer">
+                    Все услуги (6)
+                </button>
+                <button data-filter="investments" class="service-tab shrink-0 px-5 py-2.5 rounded-xl text-sm font-display font-semibold transition-all bg-white text-navy-800 border border-slate-200 hover:border-gold-500 cursor-pointer">
+                    Инвестиции и бизнес-планирование
+                </button>
+                <button data-filter="management" class="service-tab shrink-0 px-5 py-2.5 rounded-xl text-sm font-display font-semibold transition-all bg-white text-navy-800 border border-slate-200 hover:border-gold-500 cursor-pointer">
+                    Управленческий учет и стратегия
+                </button>
+            </div>
+
+            <!-- Сетка карточек услуг -->
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                
+                <!-- Услуга 1 -->
+                <article data-category="investments" class="service-card card-hover bg-white rounded-2xl border border-slate-200/90 p-7 flex flex-col justify-between shadow-executive">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="px-3 py-1 rounded-md bg-navy-900/5 text-navy-800 text-xs font-semibold">
+                                Инвестиции и ТЭО
+                            </span>
+                            <div class="w-10 h-10 rounded-xl bg-gold-500/10 text-gold-600 flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-navy-900 leading-snug">
+                            Разработка бизнес-планов и ТЭО
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mt-3">
+                            Подготовка обоснований по стандартам международных институтов развития (ЕБРР, АКФР), коммерческих банков и инвестиционных фондов.
+                        </p>
+                        <ul class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-500">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>Анализ рынка, сбыта и производственного плана</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>Сопровождение при защите проекта перед кредиторами</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4">
+                        <button onclick="selectServiceAndOpen('Разработка бизнес-планов и ТЭО')" class="w-full py-3 px-4 rounded-xl bg-slatebg hover:bg-navy-900 text-navy-900 hover:text-white border border-slate-200 hover:border-navy-900 font-display font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <span>Узнать подробнее / Запросить расчет</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Услуга 2 -->
+                <article data-category="investments" class="service-card card-hover bg-white rounded-2xl border border-slate-200/90 p-7 flex flex-col justify-between shadow-executive">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="px-3 py-1 rounded-md bg-navy-900/5 text-navy-800 text-xs font-semibold">
+                                Финансовые расчеты
+                            </span>
+                            <div class="w-10 h-10 rounded-xl bg-gold-500/10 text-gold-600 flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-navy-900 leading-snug">
+                            Финансовое моделирование
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mt-3">
+                            Построение динамических моделей в Excel с открытыми формулами, сценарным анализом чувствительности и расчетом инвестиционных метрик.
+                        </p>
+                        <ul class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-500">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>Расчет NPV, IRR, ROI, PI и срока окупаемости (PBP)</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>Прогноз БДР, БДДС и управленческого баланса</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4">
+                        <button onclick="selectServiceAndOpen('Финансовое моделирование')" class="w-full py-3 px-4 rounded-xl bg-slatebg hover:bg-navy-900 text-navy-900 hover:text-white border border-slate-200 hover:border-navy-900 font-display font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <span>Узнать подробнее / Запросить расчет</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Услуга 3 -->
+                <article data-category="management" class="service-card card-hover bg-white rounded-2xl border border-slate-200/90 p-7 flex flex-col justify-between shadow-executive">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="px-3 py-1 rounded-md bg-gold-500/15 text-gold-600 text-xs font-semibold">
+                                Аудит и диагностика
+                            </span>
+                            <div class="w-10 h-10 rounded-xl bg-gold-500/10 text-gold-600 flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-navy-900 leading-snug">
+                            Комплексный финансовый анализ и диагностика
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mt-3">
+                            Глубокая оценка финансового здоровья компании: рентабельности, ликвидности, оборачиваемости капитала и выявление скрытых точек роста.
+                        </p>
+                        <ul class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-500">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>Выявление причин кассовых разрывов и убытков</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>Анализ маржинальности продуктов и направлений</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4">
+                        <button onclick="selectServiceAndOpen('Комплексный финансовый анализ и диагностика')" class="w-full py-3 px-4 rounded-xl bg-slatebg hover:bg-navy-900 text-navy-900 hover:text-white border border-slate-200 hover:border-navy-900 font-display font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <span>Узнать подробнее / Запросить расчет</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Услуга 4 -->
+                <article data-category="management" class="service-card card-hover bg-white rounded-2xl border border-slate-200/90 p-7 flex flex-col justify-between shadow-executive">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="px-3 py-1 rounded-md bg-gold-500/15 text-gold-600 text-xs font-semibold">
+                                Управленческий учет
+                            </span>
+                            <div class="w-10 h-10 rounded-xl bg-gold-500/10 text-gold-600 flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-navy-900 leading-snug">
+                            Постановка бюджетирования и управленческого учета
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mt-3">
+                            Внедрение прозрачной системы контроля доходов, расходов и денежных потоков для принятия точных управленческих решений собственником.
+                        </p>
+                        <ul class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-500">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>Разработка регламентов и платежного календаря</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>Внедрение 3 ключевых отчетов: P&L, CashFlow, Balance</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4">
+                        <button onclick="selectServiceAndOpen('Постановка бюджетирования и управленческого учета')" class="w-full py-3 px-4 rounded-xl bg-slatebg hover:bg-navy-900 text-navy-900 hover:text-white border border-slate-200 hover:border-navy-900 font-display font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <span>Узнать подробнее / Запросить расчет</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Услуга 5 -->
+                <article data-category="investments" class="service-card card-hover bg-white rounded-2xl border border-slate-200/90 p-7 flex flex-col justify-between shadow-executive">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="px-3 py-1 rounded-md bg-navy-900/5 text-navy-800 text-xs font-semibold">
+                                Привлечение капитала
+                            </span>
+                            <div class="w-10 h-10 rounded-xl bg-gold-500/10 text-gold-600 flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-navy-900 leading-snug">
+                            Инвестиционные тизеры и сопровождение сделок
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mt-3">
+                            Профессиональная упаковка проектов для презентации частным инвесторам, партнерам и фондам прямых инвестиций, оценка стоимости бизнеса.
+                        </p>
+                        <ul class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-500">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>Подготовка инвестиционного меморандума и тизера</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>Расчет долей участия и условий выхода (Exit)</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4">
+                        <button onclick="selectServiceAndOpen('Инвестиционные тизеры и сопровождение сделок')" class="w-full py-3 px-4 rounded-xl bg-slatebg hover:bg-navy-900 text-navy-900 hover:text-white border border-slate-200 hover:border-navy-900 font-display font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <span>Узнать подробнее / Запросить расчет</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Услуга 6 -->
+                <article data-category="management" class="service-card card-hover bg-white rounded-2xl border border-slate-200/90 p-7 flex flex-col justify-between shadow-executive">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <span class="px-3 py-1 rounded-md bg-gold-500/15 text-gold-600 text-xs font-semibold">
+                                Стратегия и защита
+                            </span>
+                            <div class="w-10 h-10 rounded-xl bg-gold-500/10 text-gold-600 flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-navy-900 leading-snug">
+                            Долгосрочная финансовая стратегия
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mt-3">
+                            Оптимизация структуры собственного и заемного капитала, защита активов бизнеса и планирование масштабирования компании.
+                        </p>
+                        <ul class="mt-4 pt-4 border-t border-slate-100 space-y-2 text-xs text-slate-500">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>Управление долговой нагрузкой и дивидендная политика</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-500"></span>Финансовая дорожная карта развития на 3–5 лет</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-4">
+                        <button onclick="selectServiceAndOpen('Долгосрочная финансовая стратегия')" class="w-full py-3 px-4 rounded-xl bg-slatebg hover:bg-navy-900 text-navy-900 hover:text-white border border-slate-200 hover:border-navy-900 font-display font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <span>Узнать подробнее / Запросить расчет</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== БЛОК "АККРЕДИТАЦИИ И ПРОФЕССИОНАЛЬНЫЙ СТАТУС" ==================== -->
+    <section id="accreditations" class="py-16 lg:py-24 bg-navy-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(to right, #C5A059 1px, transparent 1px), linear-gradient(to bottom, #C5A059 1px, transparent 1px); background-size: 48px 48px;"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gold-400">Институциональное признание</span>
+                    <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-white mt-2">
+                        Аккредитации и профессиональный статус
+                    </h2>
+                </div>
+                <p class="text-slate-300 text-sm sm:text-base max-w-xl">
+                    Подтвержденная квалификация для работы по программам софинансирования консалтинговых проектов и стандартам международных институтов развития.
+                </p>
+            </div>
+
+            <!-- Карточки аккредитаций -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Аккредитация 1: ЕБРР -->
+                <div class="bg-navy-800/80 border border-gold-500/35 rounded-2xl p-6 sm:p-8 flex items-start gap-5">
+                    <div class="w-14 h-14 rounded-xl bg-gold-500/15 border border-gold-500/40 flex items-center justify-center shrink-0 text-gold-400 font-display font-extrabold text-sm tracking-tight">
+                        EBRD
+                    </div>
+                    <div>
+                        <div class="inline-block px-2.5 py-0.5 rounded bg-gold-500/20 text-gold-300 text-[11px] font-semibold uppercase tracking-wider mb-2">
+                            Международный институт
+                        </div>
+                        <h3 class="font-display font-bold text-lg sm:text-xl text-white">
+                            Европейский банк реконструкции и развития (ЕБРР / EBRD)
+                        </h3>
+                        <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                            Официальный аккредитованный консультант в базе данных ЕБРР в Кыргызстане (программа «Консультации для малого бизнеса» — ASB).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Аккредитация 2: АКФР -->
+                <div class="bg-navy-800/80 border border-gold-500/35 rounded-2xl p-6 sm:p-8 flex items-start gap-5">
+                    <div class="w-14 h-14 rounded-xl bg-gold-500/15 border border-gold-500/40 flex items-center justify-center shrink-0 text-gold-400 font-display font-extrabold text-sm tracking-tight">
+                        АКФР
+                    </div>
+                    <div>
+                        <div class="inline-block px-2.5 py-0.5 rounded bg-gold-500/20 text-gold-300 text-[11px] font-semibold uppercase tracking-wider mb-2">
+                            Фонд развития
+                        </div>
+                        <h3 class="font-display font-bold text-lg sm:text-xl text-white">
+                            Азербайджано-Кыргызский Фонд развития (АКФР)
+                        </h3>
+                        <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                            Аккредитованный консультант по подготовке бизнес-планов, ТЭО и финансовому моделированию инвестиционных проектов для рассмотрения Фондом.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Аккредитация 3: Клуб бизнес-консультантов КР -->
+                <div class="bg-navy-800/60 border border-white/10 rounded-2xl p-6 sm:p-8 flex items-start gap-5">
+                    <div class="w-14 h-14 rounded-xl bg-white/5 border border-white/15 flex items-center justify-center shrink-0 text-gold-400">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-lg sm:text-xl text-white">
+                            Клуб бизнес-консультантов Кыргызстана
+                        </h3>
+                        <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                            Действующий член и эксперт профессионального сообщества управленческих и финансовых консультантов Кыргызской Республики.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Аккредитация 4: Партнерская сеть РК -->
+                <div class="bg-navy-800/60 border border-white/10 rounded-2xl p-6 sm:p-8 flex items-start gap-5">
+                    <div class="w-14 h-14 rounded-xl bg-white/5 border border-white/15 flex items-center justify-center shrink-0 text-gold-400">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-lg sm:text-xl text-white">
+                            Партнерская сеть в Республике Казахстан
+                        </h3>
+                        <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                            Сотрудничество с консалтинговыми партнерами в Казахстане для реализации трансграничных и региональных проектов в Центральной Азии.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Официальный юридический статус -->
+            <div class="mt-8 bg-gradient-to-r from-navy-800 via-navy-800/95 to-navy-900 border border-gold-500/40 rounded-2xl p-6 sm:p-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="flex items-start sm:items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-gold-500 text-navy-950 flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase tracking-wider text-gold-400 font-semibold">Официальный юридический статус</span>
+                        <h4 class="font-display font-bold text-base sm:text-lg text-white mt-0.5">
+                            Индивидуальный предприниматель Туратбеков Данияр Раимбекович
+                        </h4>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">
+                            Свидетельство о государственной регистрации № 01932806 от 27.07.2022 г., г. Бишкек, Кыргызская Республика. Работа по официальному договору.
+                        </p>
+                    </div>
+                </div>
+                <button onclick="openConsultationModal('Запрос реквизитов и договора')" class="shrink-0 px-5 py-3 rounded-xl bg-white/10 hover:bg-gold-500 text-white hover:text-navy-950 border border-white/15 hover:border-gold-500 font-display font-semibold text-xs sm:text-sm transition-all cursor-pointer">
+                    Запросить договор и КП
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== БЛОК "ФОРМАТ РАБОТЫ" (4 ЭТАПА) ==================== -->
+    <section id="process" class="py-16 lg:py-24 bg-white border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="text-xs font-bold uppercase tracking-widest text-gold-600">Прозрачный алгоритм</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-navy-900 mt-2">
+                    Формат работы над проектом
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base mt-3">
+                    Четкая последовательность этапов с фиксированными сроками и понятным результатом на каждом шаге.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+                <!-- Этап 1 -->
+                <div class="relative bg-slatebg rounded-2xl p-6 border border-slate-200/90">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-display font-extrabold text-3xl text-gold-500/40">01</span>
+                        <span class="text-xs font-semibold text-navy-800 bg-white px-2.5 py-1 rounded-md border border-slate-200">1–2 дня</span>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-navy-900">Диагностика и ТЗ</h3>
+                    <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                        Первичная консультация, анализ вводных данных бизнеса, определение целей, подписание NDA и согласование технического задания.
+                    </p>
+                </div>
+
+                <!-- Этап 2 -->
+                <div class="relative bg-slatebg rounded-2xl p-6 border border-slate-200/90">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-display font-extrabold text-3xl text-gold-500/60">02</span>
+                        <span class="text-xs font-semibold text-navy-800 bg-white px-2.5 py-1 rounded-md border border-slate-200">3–7 дней</span>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-navy-900">Сбор данных и аудит</h3>
+                    <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                        Изучение текущей финансовой отчетности, структуры затрат, рыночных параметров и требований целевого банка или фонда.
+                    </p>
+                </div>
+
+                <!-- Этап 3 -->
+                <div class="relative bg-slatebg rounded-2xl p-6 border border-slate-200/90">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-display font-extrabold text-3xl text-gold-500/80">03</span>
+                        <span class="text-xs font-semibold text-navy-800 bg-white px-2.5 py-1 rounded-md border border-slate-200">5–14 дней</span>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-navy-900">Моделирование и расчеты</h3>
+                    <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                        Построение финансовой модели, стресс-тестирование сценариев, написание бизнес-плана или регламентов управленческого учета.
+                    </p>
+                </div>
+
+                <!-- Этап 4 -->
+                <div class="relative bg-navy-900 text-white rounded-2xl p-6 border border-gold-500/40 shadow-executive">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-display font-extrabold text-3xl text-gold-400">04</span>
+                        <span class="text-xs font-semibold text-navy-950 bg-gold-500 px-2.5 py-1 rounded-md">Результат</span>
+                    </div>
+                    <h3 class="font-display font-bold text-lg text-white">Защита и внедрение</h3>
+                    <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                        Передача готовой модели и документации, обучение команды работе с таблицами, сопровождение при защите перед инвесторами.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== БЛОК КОНТАКТОВ И ФОРМА ОБРАТНОЙ СВЯЗИ ==================== -->
+    <section id="contacts" class="py-16 lg:py-24 bg-slatebg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+                
+                <!-- Левая колонка: Контакты и реквизиты -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-gold-600">Связаться с экспертом</span>
+                        <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-navy-900 mt-2">
+                            Обсудим вашу задачу конфиденциально
+                        </h2>
+                        <p class="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
+                            Оставьте заявку, и я свяжусь с вами в рабочее время для первичного обсуждения проекта, оценки сроков и стоимости работ.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-slate-200/90 p-6 space-y-5 shadow-executive">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-navy-900 text-gold-400 flex items-center justify-center shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-xs font-semibold uppercase tracking-wider text-slate-400">Локация</div>
+                                <div class="font-display font-bold text-navy-900 text-base mt-0.5">г. Бишкек, Кыргызская Республика</div>
+                                <div class="text-xs text-slate-500 mt-0.5">Очные встречи в Бишкеке и онлайн-работа по всей ЦА</div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-navy-900 text-gold-400 flex items-center justify-center shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-xs font-semibold uppercase tracking-wider text-slate-400">Реквизиты субъекта</div>
+                                <div class="font-display font-bold text-navy-900 text-sm mt-0.5">ИП Туратбеков Данияр Раимбекович</div>
+                                <div class="text-xs text-slate-500 mt-1">Свидетельство о гос. регистрации № 01932806 от 27.07.2022 г.</div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-gold-500/15 text-gold-600 flex items-center justify-center shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-xs font-semibold uppercase tracking-wider text-slate-400">График консультаций</div>
+                                <div class="font-display font-bold text-navy-900 text-sm mt-0.5">Пн – Пт: 09:00 – 18:00 (GMT+6)</div>
+                                <div class="text-xs text-slate-500 mt-0.5">Сб — по предварительной договоренности</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Правая колонка: Форма обратной связи -->
+                <div class="lg:col-span-7">
+                    <div class="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-9 shadow-executive">
+                        <h3 class="font-display font-bold text-xl sm:text-2xl text-navy-900">
+                            Заявка на консультацию или расчет проекта
+                        </h3>
+                        <p class="text-slate-500 text-sm mt-1">
+                            Заполните форму ниже. Вся передаваемая информация строго конфиденциальна.
+                        </p>
+
+                        <form id="main-contact-form" class="mt-6 space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="client-name" class="block text-xs font-semibold uppercase tracking-wider text-navy-800 mb-2">
+                                        Ваше имя *
+                                    </label>
+                                    <input type="text" id="client-name" name="name" required placeholder="Например: Азамат Касымов"
+                                        class="w-full px-4 py-3 rounded-xl bg-slatebg border border-slate-200 text-navy-900 text-sm focus:outline-none focus:border-gold-500 focus:bg-white transition-colors">
+                                </div>
+                                <div>
+                                    <label for="client-contact" class="block text-xs font-semibold uppercase tracking-wider text-navy-800 mb-2">
+                                        Телефон / WhatsApp / Telegram *
+                                    </label>
+                                    <input type="text" id="client-contact" name="contact" required placeholder="+996 (___) __-__-__"
+                                        class="w-full px-4 py-3 rounded-xl bg-slatebg border border-slate-200 text-navy-900 text-sm focus:outline-none focus:border-gold-500 focus:bg-white transition-colors">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="client-company" class="block text-xs font-semibold uppercase tracking-wider text-navy-800 mb-2">
+                                        Компания / Отрасль
+                                    </label>
+                                    <input type="text" id="client-company" name="company" placeholder="Название компании или сфера"
+                                        class="w-full px-4 py-3 rounded-xl bg-slatebg border border-slate-200 text-navy-900 text-sm focus:outline-none focus:border-gold-500 focus:bg-white transition-colors">
+                                </div>
+                                <div>
+                                    <label for="client-service" class="block text-xs font-semibold uppercase tracking-wider text-navy-800 mb-2">
+                                        Интересующая услуга
+                                    </label>
+                                    <select id="client-service" name="service"
+                                        class="w-full px-4 py-3 rounded-xl bg-slatebg border border-slate-200 text-navy-900 text-sm focus:outline-none focus:border-gold-500 focus:bg-white transition-colors">
+                                        <option value="Разработка бизнес-планов и ТЭО">Разработка бизнес-планов и ТЭО</option>
+                                        <option value="Финансовое моделирование">Финансовое моделирование</option>
+                                        <option value="Комплексный финансовый анализ и диагностика">Комплексный финансовый анализ и диагностика</option>
+                                        <option value="Постановка бюджетирования и управленческого учета">Постановка бюджетирования и управленческого учета</option>
+                                        <option value="Инвестиционные тизеры и сопровождение сделок">Инвестиционные тизеры и сопровождение сделок</option>
+                                        <option value="Долгосрочная финансовая стратегия">Долгосрочная финансовая стратегия</option>
+                                        <option value="Другой вопрос / Комплексный проект">Другой вопрос / Комплексный проект</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="client-task" class="block text-xs font-semibold uppercase tracking-wider text-navy-800 mb-2">
+                                    Краткое описание задачи
+                                </label>
+                                <textarea id="client-task" name="task" rows="3" placeholder="Опишите цель проекта, требуемый объем инвестиций или текущую управленческую задачу..."
+                                    class="w-full px-4 py-3 rounded-xl bg-slatebg border border-slate-200 text-navy-900 text-sm focus:outline-none focus:border-gold-500 focus:bg-white transition-colors"></textarea>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+                                <span class="text-xs text-slate-400">
+                                    Нажимая кнопку, вы соглашаетесь на обработку контактных данных.
+                                </span>
+                                <button type="submit" class="px-8 py-3.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white font-display font-bold text-sm transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 shrink-0 cursor-pointer">
+                                    <span>Отправить заявку</span>
+                                    <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Блок подтверждения отправки основной формы -->
+                        <div id="main-form-success" class="hidden mt-6 p-6 rounded-2xl bg-navy-900 text-white border border-gold-500/50">
+                            <div class="flex items-start gap-4">
+                                <div class="w-11 h-11 rounded-full bg-gold-500 text-navy-950 flex items-center justify-center shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-display font-bold text-lg text-white">Заявка успешно принята!</h4>
+                                    <p id="main-success-details" class="text-slate-300 text-sm mt-1 leading-relaxed"></p>
+                                    <button onclick="resetMainForm()" class="mt-4 text-xs font-semibold text-gold-400 hover:text-gold-300 underline cursor-pointer">
+                                        Отправить еще один запрос
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ПОДВАЛ (FOOTER) ==================== -->
+    <footer class="bg-navy-950 text-slate-400 border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-white/10">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <span class="font-display font-bold text-white text-lg">Д.Р. Туратбеков</span>
+                        <span class="text-slate-600">|</span>
+                        <span class="font-serif italic text-gold-400 text-base">«Защита и приумножение!»</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-2">
+                        Индивидуальный предприниматель Туратбеков Данияр Раимбекович • Свидетельство о гос. регистрации № 01932806 от 27.07.2022 г., г. Бишкек
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-6 text-xs font-medium">
+                    <a href="#about" class="hover:text-gold-400 transition-colors">Об эксперте</a>
+                    <a href="#services" class="hover:text-gold-400 transition-colors">Услуги</a>
+                    <a href="#accreditations" class="hover:text-gold-400 transition-colors">Аккредитации</a>
+                    <a href="#contacts" class="hover:text-gold-400 transition-colors">Контакты</a>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+                <p>© <span id="current-year"></span> ИП Туратбеков Д.Р. Все права защищены.</p>
+                <p>Финансовый и управленческий консалтинг • Бишкек, Кыргызстан</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== МОДАЛЬНОЕ ОКНО ЗАЯВКИ ==================== -->
+    <div id="consultation-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Затемнение фона -->
+        <div onclick="closeConsultationModal()" class="fixed inset-0 bg-navy-950/80 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+            <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-lg border border-gold-500/30">
+                <!-- Шапка модального окна -->
+                <div class="bg-navy-900 px-6 py-5 flex items-center justify-between border-b border-white/10">
+                    <div>
+                        <span class="text-[11px] uppercase tracking-widest text-gold-400 font-semibold">Персональная консультация</span>
+                        <h3 id="modal-title" class="font-display font-bold text-lg text-white mt-0.5">
+                            Запрос расчета по проекту
+                        </h3>
+                    </div>
+                    <button onclick="closeConsultationModal()" aria-label="Закрыть окно" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Тело модального окна -->
+                <div class="p-6 sm:p-7">
+                    <form id="modal-contact-form" class="space-y-4">
+                        <div>
+                            <label for="modal-service" class="block text-xs font-semibold uppercase tracking-wider text-navy-800 mb-1.5">
+                                Выбранное направление
+                            </label>
+                            <select id="modal-service" name="service"
+                                class="w-full px-3.5 py-2.5 rounded-xl bg-slatebg border border-slate-200 text-navy-900 text-sm font-medium focus:outline-none focus:border-gold-500">
+                                <option value="Разработка бизнес-планов и ТЭО">Разработка бизнес-планов и ТЭО</option>
+                                <option value="Финансовое моделирование">Финансовое моделирование</option>
+                                <option value="Комплексный финансовый анализ и диагностика">Комплексный финансовый анализ и диагностика</option>
+                                <option value="Постановка бюджетирования и управленческого учета">Постановка бюджетирования и управленческого учета</option>
+                                <option value="Инвестиционные тизеры и сопровождение сделок">Инвестиционные тизеры и сопровождение сделок</option>
+                                <option value="Долгосрочная финансовая стратегия">Долгосрочная финансовая стратегия</option>
+                                <option value="Общая консультация">Общая консультация / Обсуждение проекта</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="modal-name" class="block text-xs font-semibold uppercase tracking-wider text-navy-800 mb-1.5">
+                                Ваше имя *
+                            </label>
+                            <input type="text" id="modal-name" required placeholder="Введите ваше имя"
+                                class="w-full px-3.5 py-2.5 rounded-xl bg-slatebg border border-slate-200 text-navy-900 text-sm focus:outline-none focus:border-gold-500">
+                        </div>
+
+                        <div>
+                            <label for="modal-contact" class="block text-xs font-semibold uppercase tracking-wider text-navy-800 mb-1.5">
+                                Телефон или мессенджер (WhatsApp / Telegram) *
+                            </label>
+                            <input type="text" id="modal-contact" required placeholder="+996 (___) __-__-__"
+                                class="w-full px-3.5 py-2.5 rounded-xl bg-slatebg border border-slate-200 text-navy-900 text-sm focus:outline-none focus:border-gold-500">
+                        </div>
+
+                        <div>
+                            <label for="modal-task" class="block text-xs font-semibold uppercase tracking-wider text-navy-800 mb-1.5">
+                                Краткий комментарий (необязательно)
+                            </label>
+                            <textarea id="modal-task" rows="2" placeholder="Например: нужен бизнес-план для подачи в АКФР или банк"
+                                class="w-full px-3.5 py-2.5 rounded-xl bg-slatebg border border-slate-200 text-navy-900 text-sm focus:outline-none focus:border-gold-500"></textarea>
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="w-full py-3.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-navy-950 font-display font-bold text-sm transition-all shadow-gold-glow cursor-pointer">
+                                Отправить запрос эксперту
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Сообщение об успешной отправке в модальном окне -->
+                    <div id="modal-success-state" class="hidden text-center py-4 space-y-4">
+                        <div class="w-14 h-14 rounded-full bg-gold-500/20 text-gold-600 flex items-center justify-center mx-auto">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-display font-bold text-xl text-navy-900">Ваш запрос принят!</h4>
+                        <p id="modal-success-text" class="text-slate-600 text-sm leading-relaxed"></p>
+                        <button onclick="closeConsultationModal()" class="mt-2 px-6 py-2.5 rounded-xl bg-navy-900 text-white font-display font-semibold text-sm cursor-pointer">
+                            Вернуться на сайт
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== СКРИПТЫ ИНТЕРАКТИВНОСТИ ==================== -->
+    <script>
+        // 1. Установка актуального года в подвале
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 2. Мобильное меню (открытие/закрытие)
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const burgerIcon = document.getElementById('burger-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                burgerIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+                burgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        });
+
+        // Закрывать мобильное меню при клике на ссылку
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                burgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        });
+
+        // 3. Интерактивная фильтрация списка услуг
+        const filterTabs = document.querySelectorAll('.service-tab');
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const filterValue = tab.getAttribute('data-filter');
+
+                // Обновление активного состояния кнопок
+                filterTabs.forEach(btn => {
+                    btn.classList.remove('bg-navy-900', 'text-white', 'shadow-sm');
+                    btn.classList.add('bg-white', 'text-navy-800', 'border', 'border-slate-200');
+                });
+                tab.classList.remove('bg-white', 'text-navy-800', 'border', 'border-slate-200');
+                tab.classList.add('bg-navy-900', 'text-white', 'shadow-sm');
+
+                // Фильтрация карточек
+                serviceCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filterValue === 'all' || category === filterValue) {
+                        card.classList.remove('hidden');
+                        card.classList.add('flex');
+                    } else {
+                        card.classList.add('hidden');
+                        card.classList.remove('flex');
+                    }
+                });
+            });
+        });
+
+        // 4. Управление модальным окном и подстановка выбранной услуги
+        const modal = document.getElementById('consultation-modal');
+        const modalServiceSelect = document.getElementById('modal-service');
+        const mainServiceSelect = document.getElementById('client-service');
+        const modalForm = document.getElementById('modal-contact-form');
+        const modalSuccess = document.getElementById('modal-success-state');
+
+        function setSelectValueSafe(selectElement, value) {
+            for (let i = 0; i < selectElement.options.length; i++) {
+                if (selectElement.options[i].value === value) {
+                    selectElement.selectedIndex = i;
+                    return;
+                }
+            }
+            selectElement.selectedIndex = selectElement.options.length - 1;
+        }
+
+        function openConsultationModal(serviceName) {
+            // Сбрасываем состояние окна на форму
+            modalForm.classList.remove('hidden');
+            modalSuccess.classList.add('hidden');
+
+            if (serviceName) {
+                setSelectValueSafe(modalServiceSelect, serviceName);
+                setSelectValueSafe(mainServiceSelect, serviceName);
+            }
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function selectServiceAndOpen(serviceName) {
+            // Подставляем в обе формы (в модальную и в нижнюю на странице) и открываем модальное окно
+            openConsultationModal(serviceName);
+        }
+
+        function closeConsultationModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Закрытие модального окна по клавише Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeConsultationModal();
+            }
+        });
+
+        // 5. Обработка отправки модальной формы
+        modalForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('modal-name').value.trim();
+            const contact = document.getElementById('modal-contact').value.trim();
+            const service = modalServiceSelect.value;
+
+            document.getElementById('modal-success-text').textContent = 
+                `Уважаемый(ая) ${name}, ваш запрос по направлению «${service}» зарегистрирован. Данияр Раимбекович свяжется с вами по указанному контакту (${contact}) в ближайшее рабочее время.`;
+
+            modalForm.classList.add('hidden');
+            modalSuccess.classList.remove('hidden');
+            modalForm.reset();
+        });
+
+        // 6. Обработка отправки основной формы в блоке контактов
+        const mainForm = document.getElementById('main-contact-form');
+        const mainFormSuccess = document.getElementById('main-form-success');
+
+        mainForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('client-name').value.trim();
+            const contact = document.getElementById('client-contact').value.trim();
+            const service = mainServiceSelect.value;
+
+            document.getElementById('main-success-details').textContent = 
+                `Благодарим за обращение, ${name}! Заявка по теме «${service}» принята в работу. Мы свяжемся с вами по контакту ${contact} в течение рабочего дня.`;
+
+            mainForm.classList.add('hidden');
+            mainFormSuccess.classList.remove('hidden');
+        });
+
+        function resetMainForm() {
+            mainForm.reset();
+            mainFormSuccess.classList.add('hidden');
+            mainForm.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
